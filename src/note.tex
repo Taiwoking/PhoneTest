@@ -1,0 +1,103 @@
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css';
+
+const faq = [
+  {
+    id: 1,
+    question: "What is Frontend Mentor, and how will it help me?",
+    answer:
+      "Frontend Mentor offers realistic coding challenges to help developersimprove their frontend coding skills with projects in HTML,CSS,andJavaScript.It's suitable for all levels and ideal forportfoliobuilding",
+    isOpen: false
+  },
+
+  {
+    id: 2,
+    question: "Is Frontend Mentor free?",
+    answer:
+      "Frontend Mentor offers realistic coding challenges to help developersimprove their frontend coding skills with projects in HTML,CSS,andJavaScript.It's suitable for all levels and ideal forportfoliobuilding",
+    isOpen: false
+  },
+  {
+    id: 3,
+    question: "Is Frontend Mentor free?",
+    answer:
+      "Frontend Mentor offers realistic coding challenges to help developersimprove their frontend coding skills with projects in HTML,CSS,andJavaScript.It's suitable for all levels and ideal forportfoliobuilding",
+    isOpen: false
+  },
+  {
+    id: 4,
+    question: "Is coding easy",
+    answer: "NO",
+    isOpen: false
+  },
+  {
+    id: 5,
+    question: "how long does it take you to learn fullstack deves",
+    answer:
+      "Frontend Mentor offers realistic coding challenges to help developersimprove their frontend coding skills with projects in HTML,CSS,andJavaScript.It's suitable for all levels and ideal forportfoliobuilding",
+    isOpen: false
+  },
+];
+
+function App() {
+  const [showAnswer, setShowAnswer] = useState(false)
+  const [presentIndex, setPresentIndex] = useState(0);
+  const [allFaq, setAllFaq] = useState(faq)
+
+
+  function toggleAnswer(index) {
+    // if (showAnswer === true){
+    //   setShowAnswer(false)
+    // } else{
+    //   setShowAnswer(true)
+    // }
+
+    //for single toggle
+    // setPresentIndex(index)
+    const newFaq = [...allFaq];
+    newFaq[index].isOpen = !newFaq[index].isOpen;
+    newFaq[index].question = "Yay David is happy the class would soon be over"
+    console.log(newFaq)
+
+
+    setAllFaq(newFaq)
+
+  }
+
+  return (
+    <>
+
+      <div>
+        {
+          allFaq.slice(presentIndex, presentIndex + 2).map((item, index) => {
+            return (
+              <div key={index}><header>
+                <h3>{item.question}</h3>
+                <p className="closeBtn" onClick={() => toggleAnswer(index)}>x</p>
+              </header>
+
+                <footer className="faq-footer" style={{ display: item.isOpen ? "block" : "none" }}>
+                  {item.answer}
+                </footer></div>
+            )
+          })
+        }
+        <button onClick={() => setPresentIndex((prev) => prev + 2)}>Next</button>
+        {/* <header>
+            <h3>Is Frontend Mentor free?</h3>
+            <p className="closeBtn" onClick={toggleAnswer}>x</p>
+          </header>
+ 
+         <footer className="faq-footer" style={{display:showAnswer ? "block":"none"}}>
+            Yes, Frontend Mentor provides a free version with a variety of
+            challenges. There's also a premium plan for additional features and
+            resources.
+          </footer> */}
+      </div>
+    </>
+  )
+}
+
+export default App
